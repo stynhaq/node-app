@@ -42,6 +42,15 @@ pipeline {
                 sh 'sudo docker build -t africodes/node-app:$(node -p "require(\'./app/package.json\').version") .'
             }
         }
+        stage('Push Image to  DockerHub'){
+                steps{
+		withCredentials([string(credentialsId: 'dockerhubpass', variable: 'DockerHubPass')]) {
+                sh "sudo docker login -u africodes -p ${DockerHubPass}"
+		}
+                sh 'sudo docker push africodes/demoapp:$(node -p "require(\'./app/package.json\').version")'
+            }
+        }
+
 
     }
 }
