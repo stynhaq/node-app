@@ -44,7 +44,7 @@ pipeline {
         }
         stage('Push Image to  DockerHub'){
                 steps{
-		withCredentials([string(credentialsId: 'dockerhubpass', variable: 'DockerHubPass')]) {
+		withCredentials([string(credentialsId: 'docker-hub-pass', variable: 'DockerHubPass')]) {
                 sh "sudo docker login -u africodes -p ${DockerHubPass}"
 		}
                 sh 'sudo docker push africodes/demoapp:$(node -p "require(\'./app/package.json\').version")'
