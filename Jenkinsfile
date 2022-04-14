@@ -47,7 +47,7 @@ pipeline {
 		withCredentials([string(credentialsId: 'docker-hub-pass', variable: 'DockerHubPass')]) {
                 sh "sudo docker login -u africodes -p ${DockerHubPass}"
 		}
-                sh 'sudo docker push africodes/demoapp:$(node -p "require(\'./app/package.json\').version")'
+                sh 'sudo docker push africodes/node-app:$(node -p "require(\'./app/package.json\').version")'
             }
         }
 
